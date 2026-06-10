@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EIE SA — Enough Is Enough South Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — Frontline Newspaper
+   ============================================================ */
+:root {
+  /* 60% — White & Slate */
+  --bg:         #FFFFFF;
+  --bg-soft:    #F6F6F6;
+  --bg-rule:    #EFEFEF;
+  --text:       #1A1A1A;
+  --text-muted: #4A4A4A;
+  --text-light: #777777;
+
+  /* 30% — Crimson Red */
+  --red:        #CC1A1A;
+  --red-dark:   #A31414;
+  --red-pale:   #FFF0F0;
+
+  /* 10% — Charcoal / Midnight */
+  --charcoal:   #1C1C1C;
+  --charcoal-2: #2A2A2A;
+  --border:     #DCDCDC;
+
+  --display: 'Oswald', sans-serif;
+  --serif:   'Playfair Display', serif;
+  --body:    'Inter', sans-serif;
+
+  --nav-h:    60px;
+  --max-w:    1100px;
+  --sp:       88px 24px;
+  --sp-sm:    56px 24px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; font-family: var(--body); background: none; }
+img { max-width: 100%; display: block; }
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+.eyebrow {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+.section-title em { font-style: normal; color: var(--red); }
+.section-body {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 580px;
+  line-height: 1.8;
+}
+.rule { border: none; border-top: 1px solid var(--border); margin: 0; }
+.rule-heavy { border: none; border-top: 3px solid var(--charcoal); margin: 0; }
+.rule-red { border: none; border-top: 3px solid var(--red); margin: 0; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  border-radius: 2px;
+  transition: all 0.15s;
+}
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { background: var(--red-dark); }
+.btn-outline { border: 2px solid var(--charcoal); color: var(--charcoal); }
+.btn-outline:hover { background: var(--charcoal); color: #fff; }
+.btn-white { background: #fff; color: var(--red); }
+.btn-white:hover { background: var(--bg-soft); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: var(--charcoal);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid var(--red);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-logo span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+}
+.nav-links li a {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  color: #aaa;
+  transition: color 0.15s, background 0.15s;
+  border-radius: 2px;
+}
+.nav-links li a:hover,
+.nav-links li a.active { color: #fff; background: var(--red); }
+
+.nav-cta {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--red);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.nav-cta:hover { background: var(--red-dark); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  background: none;
+}
+.hamburger span { display: block; width: 22px; height: 2px; background: #fff; }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: var(--charcoal);
+  z-index: 199;
+  padding: 8px 0 16px;
+  flex-direction: column;
+  border-bottom: 3px solid var(--red);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  color: #aaa;
+  border-bottom: 1px solid #2a2a2a;
+}
+.mobile-menu a.active,
+.mobile-menu a:hover { color: var(--red); }
+
+/* ============================================================
+   TOP BAR (newspaper dateline)
+   ============================================================ */
+.top-bar {
+  background: var(--charcoal);
+  padding-top: var(--nav-h);
+}
+.top-bar-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+}
+.dateline {
+  font-size: 11px;
+  color: #777;
+  letter-spacing: 1px;
+  font-family: var(--display);
+  text-transform: uppercase;
+}
+.dateline span { color: var(--red); margin-right: 8px; }
+
+/* ============================================================
+   HERO — newspaper front page
+   ============================================================ */
+.hero {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+
+.hero-masthead {
+  background: var(--charcoal);
+  padding: 32px 24px 28px;
+  text-align: center;
+  position: relative;
+  margin-top: 40px;
+}
+.hero-masthead::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--red);
+}
+.masthead-title {
+  font-family: var(--display);
+  font-size: clamp(52px, 10vw, 100px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 0.9;
+  color: #fff;
+  text-transform: uppercase;
+}
+.masthead-title em { font-style: normal; color: var(--red); }
+.masthead-sub {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #888;
+  margin-top: 12px;
+}
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hero-lead {
+  padding: 48px 40px 48px 0;
+  border-right: 1px solid var(--border);
+}
+.hero-kicker {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.hero-headline {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--charcoal);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+.hero-deck {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 520px;
+  border-left: 4px solid var(--red);
+  padding-left: 20px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-sidebar {
+  padding: 48px 0 48px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sidebar-stat {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-stat:first-child { padding-top: 0; }
+.sidebar-stat:last-child { border-bottom: none; }
+.stat-num {
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.sidebar-stat:hover .stat-num { transform: scale(1.03); transition: transform 0.2s; }
+.stat-label {
+  font-size: 12px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   MARQUEE STRIP
+   ============================================================ */
+.marquee-strip {
+  background: var(--red);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marquee 28s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  flex-shrink: 0;
+}
+.marquee-dot {
+  color: rgba(255,255,255,0.4) !important;
+  letter-spacing: 0 !important;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   VALUES
+   ============================================================ */
+.values-section {
+  padding: var(--sp);
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+}
+.values-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.value-card {
+  background: var(--bg);
+  padding: 36px 28px;
+  transition: background 0.2s;
+}
+.value-card:hover { background: var(--red-pale); }
+.value-card:hover .value-name { color: var(--red); }
+.value-num {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--red);
+  margin-bottom: 20px;
+}
+.value-name {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.value-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+
+/* ============================================================
+   CAMPAIGN PREVIEW
+   ============================================================ */
+.campaigns-home {
+  padding: var(--sp);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.ch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--charcoal);
+}
+.campaign-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.campaign-card {
+  background: var(--bg);
+  padding: 36px 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.campaign-card:hover { background: var(--bg-soft); }
+.cc-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--red);
+  display: inline-block;
+  padding: 3px 8px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+.cc-tag.upcoming { background: var(--charcoal); }
+.cc-tag.dev { background: #777; }
+.cc-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.cc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; flex: 1; margin-bottom: 24px; }
+.cc-link {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+.page-header {
+  background: var(--charcoal);
+  padding: 64px 24px 56px;
+  border-bottom: 4px solid var(--red);
+}
+.page-header-inner { max-width: var(--max-w); margin: 0 auto; }
+.page-header .section-title { color: #fff; }
+.page-header .section-title em { color: var(--red); }
+.page-header .section-body { color: #aaa; }
+
+.about-lead {
+  padding: var(--sp);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.about-lead-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.pull-quote {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--charcoal);
+  border-left: 5px solid var(--red);
+  padding-left: 28px;
+  margin-bottom: 32px;
+}
+.body-text { font-size: 15px; color: var(--text-muted); line-height: 1.85; }
+.body-text p { margin-bottom: 18px; }
+
+.structure-section {
+  padding: var(--sp);
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+}
+.structure-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 48px;
+}
+.structure-card {
+  background: var(--bg);
+  padding: 32px 28px;
+  border-top: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+.structure-card:hover { border-top-color: var(--red); }
+.sc-role {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.sc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+/* ============================================================
+   CAMPAIGNS PAGE
+   ============================================================ */
+.campaign-list { padding: var(--sp); background: var(--bg); }
+.campaign-list-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+.campaign-item {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 56px;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.campaign-item:last-child { border-bottom: none; }
+.ci-left {}
+.ci-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.ci-title {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.ci-status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.s-active { background: var(--red); color: #fff; }
+.s-upcoming { background: var(--charcoal); color: #fff; }
+.s-dev { background: var(--bg-soft); color: var(--text-muted); border: 1px solid var(--border); }
+
+.ci-right {}
+.ci-body { font-size: 15px; color: var(--text-muted); line-height: 1.85; }
+.ci-body p { margin-bottom: 16px; }
+.ci-list { list-style: none; padding: 0; margin: 0 0 20px; }
+.ci-list li {
+  padding: 10px 0 10px 20px;
+  border-bottom: 1px solid var(--bg-rule);
+  font-size: 14px;
+  color: var(--text-muted);
+  position: relative;
+}
+.ci-list li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+/* ============================================================
+   ELECTORAL REFORM
+   ============================================================ */
+.reform-problem {
+  padding: var(--sp);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.reform-problem-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+.problem-statement {
+  font-family: var(--display);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.15;
+  max-width: 800px;
+  margin-bottom: 40px;
+  color: var(--charcoal);
+}
+.problem-statement span { color: var(--red); }
+
+.chain-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 48px 0;
+  background: var(--border);
+  gap: 1px;
+  flex-wrap: wrap;
+}
+.chain-node {
+  flex: 1;
+  min-width: 160px;
+  background: var(--bg-soft);
+  padding: 28px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+.chain-node.highlighted { background: var(--red); }
+.chain-node.highlighted .cn-label { color: #fff; }
+.chain-node.highlighted .cn-sub { color: rgba(255,255,255,0.7); }
+.cn-label {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--charcoal);
+}
+.cn-sub { font-size: 11px; color: var(--text-light); letter-spacing: 0.5px; }
+.cn-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 0 8px;
+  font-size: 18px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.reform-proposals {
+  padding: var(--sp);
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+}
+.reform-proposals-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+.reform-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 40px;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.reform-item:last-child { border-bottom: none; }
+.ri-num {
+  font-family: var(--display);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+.ri-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.ri-body { font-size: 15px; color: var(--text-muted); line-height: 1.85; }
+.ri-body p { margin-bottom: 14px; }
+.ri-result {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: var(--red-pale);
+  border-left: 4px solid var(--red);
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   JOIN / DONATE
+   ============================================================ */
+.join-ways {
+  padding: var(--sp);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.join-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 48px;
+}
+.join-card {
+  background: var(--bg);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+}
+.jc-icon { font-size: 28px; margin-bottom: 20px; }
+.jc-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.jc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; flex: 1; margin-bottom: 24px; }
+
+.donate-banner {
+  background: var(--charcoal);
+  padding: var(--sp);
+  border-bottom: 4px solid var(--red);
+}
+.donate-banner-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.donate-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.donate-title em { font-style: normal; color: var(--red); }
+.donate-body { font-size: 15px; color: #aaa; line-height: 1.8; margin-bottom: 28px; }
+.donate-methods { display: flex; flex-direction: column; gap: 1px; background: #333; }
+.donate-method {
+  background: #242424;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dm-name {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.dm-detail { font-size: 12px; color: #888; font-family: monospace; }
+
+.volunteer-section {
+  padding: var(--sp);
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+}
+.volunteer-inner {
+  max-width: 680px; margin: 0 auto; padding: 0 24px;
+}
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-bottom: 2px solid var(--charcoal);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-bottom-color: var(--red); }
+.form-group textarea { height: 120px; resize: vertical; }
+.form-group select { appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%231A1A1A' d='M0 0h10L5 6z'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--red);
+  color: #fff;
+  padding: 16px 36px;
+  width: 100%;
+  border-radius: 0;
+  transition: background 0.15s;
+}
+.form-submit:hover { background: var(--red-dark); }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-body {
+  padding: var(--sp);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.contact-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-details { display: flex; flex-direction: column; gap: 36px; }
+.cd-label {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.cd-value { font-size: 15px; color: var(--charcoal); line-height: 1.6; }
+.cd-value a { color: var(--red); }
+.socials { display: flex; flex-direction: column; gap: 10px; }
+.social-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg-rule);
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+.social-row:hover { color: var(--red); }
+.social-platform {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  width: 120px;
+  color: var(--charcoal);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--charcoal);
+  padding: 56px 24px 32px;
+  border-top: 4px solid var(--red);
+}
+.footer-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 56px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #2a2a2a;
+}
+.footer-brand { }
+.fb-name {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.fb-name span { color: var(--red); }
+.fb-desc { font-size: 13px; color: #888; line-height: 1.8; max-width: 280px; }
+.fc-title {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 16px;
+}
+.fc-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.fc-links li a { font-size: 13px; color: #aaa; transition: color 0.15s; }
+.fc-links li a:hover { color: var(--red); }
+.footer-bottom {
+  max-width: var(--max-w); margin: 0 auto;
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.fc-copy { font-size: 12px; color: #666; }
+.fc-tag {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 960px) {
+  .hero-body { grid-template-columns: 1fr; }
+  .hero-lead { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; }
+  .hero-sidebar { padding-left: 0; flex-direction: row; flex-wrap: wrap; gap: 0; }
+  .sidebar-stat { flex: 1; min-width: 140px; padding: 20px 16px; border-right: 1px solid var(--border); border-bottom: none; }
+  .sidebar-stat:last-child { border-right: none; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .campaign-cards { grid-template-columns: 1fr 1fr; }
+  .about-lead-inner { grid-template-columns: 1fr; gap: 40px; }
+  .structure-grid { grid-template-columns: 1fr 1fr; }
+  .campaign-item { grid-template-columns: 1fr; gap: 24px; }
+  .reform-item { grid-template-columns: 48px 1fr; gap: 24px; }
+  .donate-banner-inner { grid-template-columns: 1fr; gap: 40px; }
+  .join-grid { grid-template-columns: 1fr 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .values-header { grid-template-columns: 1fr; }
+  .chain-wrapper { flex-direction: column; }
+  .cn-arrow { transform: rotate(90deg); padding: 6px 0; }
+}
+
+@media (max-width: 600px) {
+  :root { --sp: 56px 16px; --sp-sm: 40px 16px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .values-grid { grid-template-columns: 1fr; }
+  .campaign-cards { grid-template-columns: 1fr; }
+  .structure-grid { grid-template-columns: 1fr; }
+  .join-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .hero-sidebar { flex-direction: column; }
+  .sidebar-stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .ch-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">EIE <span>SA</span></div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+      <li><a href="#" onclick="showPage('campaigns')" id="nav-campaigns">Campaigns</a></li>
+      <li><a href="#" onclick="showPage('reform')" id="nav-reform">Electoral Reform</a></li>
+      <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta" onclick="showPage('join')">Join the Movement</a>
+    <button class="hamburger" onclick="toggleMobile()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');toggleMobile()" id="mob-home" class="active">Home</a>
+  <a href="#" onclick="showPage('about');toggleMobile()" id="mob-about">About</a>
+  <a href="#" onclick="showPage('campaigns');toggleMobile()" id="mob-campaigns">Campaigns</a>
+  <a href="#" onclick="showPage('reform');toggleMobile()" id="mob-reform">Electoral Reform</a>
+  <a href="#" onclick="showPage('join');toggleMobile()" id="mob-join">Join / Donate</a>
+  <a href="#" onclick="showPage('contact');toggleMobile()" id="mob-contact">Contact</a>
+</div>
+
+<main>
+
+<section class="page-section active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-masthead">
+      <div class="masthead-title">Enough <em>Is</em> Enough</div>
+      <div class="masthead-sub">South Africa · Youth-Led Civil Society Movement · Est. 2025</div>
+    </div>
+
+    <div class="hero-body">
+      <div class="hero-lead">
+        <div class="hero-kicker">The 2026 Local Government Elections Are Coming</div>
+        <h1 class="hero-headline">We Refuse to Inherit a Broken Nation</h1>
+        <p class="hero-deck">South Africa's promise of 1994 has not been fulfilled. Corruption and systemic mismanagement have directly contributed to devastating youth unemployment, rising living costs, and social disillusionment. EIE SA exists to change the rules.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-red" onclick="showPage('join')">Join the Movement</a>
+          <a href="#" class="btn btn-outline" onclick="showPage('reform')">Our Reform Agenda</a>
+        </div>
+      </div>
+      <div class="hero-sidebar">
+        <div class="sidebar-stat">
+          <div class="stat-num">2026</div>
+          <div class="stat-label">LGE — Are you registered with the IEC to exercise your power?</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="stat-num">&gt;60%</div>
+          <div class="stat-label">Unemployment rate among South African youth aged 15-24</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="stat-num">9</div>
+          <div class="stat-label">Provinces. One united front demanding total accountability.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Mobilise</span><span class="marquee-dot">◆</span>
+      <span>Educate</span><span class="marquee-dot">◆</span>
+      <span>Empower</span><span class="marquee-dot">◆</span>
+      <span>Hold Them Accountable</span><span class="marquee-dot">◆</span>
+      <span>#EnoughIsEnough</span><span class="marquee-dot">◆</span>
+      <span>#YourVoteYourPower</span><span class="marquee-dot">◆</span>
+      <span>#JobsForYouth</span><span class="marquee-dot">◆</span>
+      <span>Mobilise</span><span class="marquee-dot">◆</span>
+      <span>Educate</span><span class="marquee-dot">◆</span>
+      <span>Empower</span><span class="marquee-dot">◆</span>
+      <span>Hold Them Accountable</span><span class="marquee-dot">◆</span>
+      <span>#EnoughIsEnough</span><span class="marquee-dot">◆</span>
+      <span>#YourVoteYourPower</span><span class="marquee-dot">◆</span>
+      <span>#JobsForYouth</span><span class="marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <section class="values-section">
+    <div class="container">
+      <div class="values-header">
+        <div>
+          <div class="eyebrow">What We Stand For</div>
+          <h2 class="section-title">Our Core <em>Values</em></h2>
+        </div>
+        <p class="section-body">These are not idle aspirations. They are the strict organizational benchmarks we hold ourselves—and our public leaders—to every day.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-num">01</div>
+          <div class="value-name">Accountability</div>
+          <div class="value-desc">Public office is a sacred duty, not a personal privilege. Every official must answer directly to the sovereign citizens—not to political party bosses.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-num">02</div>
+          <div class="value-name">Transparency</div>
+          <div class="value-desc">Open governance through complete public scrutiny. Citizens possess an unshakeable right to see exactly how public resources are distributed.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-num">03</div>
+          <div class="value-name">Active Citizenship</div>
+          <div class="value-desc">Democracy is not a spectator sport. We equip ordinary communities to move beyond peaceful protest into direct policy and legislative intervention.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="campaigns-home">
+    <div class="container">
+      <div class="ch-header">
+        <div>
+          <div class="eyebrow">Active Pipeline</div>
+          <h2 class="section-title" style="margin-bottom:0;">National <em>Campaigns</em></h2>
+        </div>
+        <a href="#" class="btn btn-outline" onclick="showPage('campaigns')">View Details</a>
+      </div>
+      <div class="campaign-cards">
+        <div class="campaign-card" onclick="showPage('campaigns')">
+          <span class="cc-tag">Active Pivot</span>
+          <h3 class="cc-title">Jobs for Youth (J4Y)</h3>
+          <p class="cc-desc">Demanding binding 30-40% public and private employment quotas, full-time EPWP absorption, and an industrial framework designed to protect our future.</p>
+          <span class="cc-link">Read Strategy Brief →</span>
+        </div>
+        <div class="campaign-card" onclick="showPage('campaigns')">
+          <span class="cc-tag">Running Concurrent</span>
+          <h3 class="cc-title">Your Vote, Your Power</h3>
+          <p class="cc-desc">A sweeping civic education initiative driving youth registration, ward-level structural tracking, and historic voter turnout for the upcoming 2026 LGE.</p>
+          <span class="cc-link">Read Strategy Brief →</span>
+        </div>
+        <div class="campaign-card" onclick="showPage('campaigns')">
+          <span class="cc-tag upcoming">Upcoming</span>
+          <h3 class="cc-title">Transparency Now!</h3>
+          <p class="cc-desc">Deploying localized citizen watchdogs and policy evaluation modules to root out municipal procurement corruption and enforce open budget structures.</p>
+          <span class="cc-link">Learn More →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="page-section" id="page-about">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="eyebrow">Who We Are</div>
+      <h1 class="section-title">A Project of <em>Nation-Building</em></h1>
+      <p class="section-body">Enough Is Enough South Africa is a youth-led civic movement refusing to watch structural failures dismantle our future. We are transforming frustration into programmatic power.</p>
+    </div>
+  </div>
+
+  <div class="about-lead">
+    <div class="about-lead-inner">
+      <div>
+        <div class="pull-quote">"Protest alone will not fix a broken system. We must change the rules of engagement."</div>
+        <p class="body-text" style="font-weight: 500; color: var(--text);">Our movement arises from a collective recognition that the democratic promises made in 1994 have been compromised by institutional decay, deep corruption, and political insulation.</p>
+      </div>
+      <div class="body-text">
+        <p>We see millions of young South Africans systematically excluded from economic participation, facing localized infrastructure collapses, poor water governance, and complete municipal neglect. EIE SA provides the operational backbone, civic training, and legal advocacy frameworks required to turn passive voters into an unyielding force for accountability.</p>
+        <p>By coordinating community watchdogs, driving institutional petitions, and demanding deep structural reforms, we are laying the groundwork for sustainable public integrity across all spheres of South African society.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="structure-section">
+    <div class="container">
+      <div class="eyebrow">Operational Framework</div>
+      <h2 class="section-title">How We are <em>Constituted</em></h2>
+      <p class="section-body">Built to ensure decentralised efficiency, flat-hierarchy decision-making, and bulletproof strategic execution from national coordination to our street-level working groups.</p>
+      
+      <div class="structure-grid">
+        <div class="structure-card">
+          <h3 class="sc-role">National Coordinating Committee (NCC)</h3>
+          <p class="sc-desc">The central executive organ guiding ideological alignment, strategic alliance evaluation, national campaign timelines, and institutional performance monitoring.</p>
+        </div>
+        <div class="structure-card">
+          <h3 class="sc-role">Media & Communications Team</h3>
+          <p class="sc-desc">Managing our daily platform visibility, tracking real-time current affairs trends, countering structural narratives, and hosting public live-dialogue forums.</p>
+        </div>
+        <div class="structure-card">
+          <h3 class="sc-role">Legal & Advocacy Team</h3>
+          <p class="sc-desc">Filing access-to-information acts, checking regulatory compliance, drafting formal memorandums of demands, and protecting civic actors from state overreach.</p>
+        </div>
+        <div class="structure-card">
+          <h3 class="sc-role">Community Engagement Team</h3>
+          <p class="sc-desc">Anchoring our decentralized provincial and regional chapters, running local employability clinics, and driving grassroots voter mobilization directly on the ground.</p>
+        </div>
+        <div class="structure-card">
+          <h3 class="sc-role">Administrative & Logistics Team</h3>
+          <p class="sc-desc">Enforcing strict operational timelines, managing physical deployment materials, managing data security, and organizing municipal delivery delegations.</p>
+        </div>
+        <div class="structure-card">
+          <h3 class="sc-role">Finance Committee</h3>
+          <p class="sc-desc">Sustaining independent crowdfunding campaigns and deploying resources with absolute transparency through clear, public-facing ledger auditing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="page-section" id="page-campaigns">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="eyebrow">Strategic Frontlines</div>
+      <h1 class="section-title">Our Active <em>Campaigns</em></h1>
+      <p class="section-body">We do not engage in rhetorical debate. We execute targeted, structured campaigns that bridge the gap between digital advocacy and physical ground-level intervention.</p>
+    </div>
+  </div>
+
+  <div class="campaign-list">
+    <div class="campaign-list-inner">
+      
+      <div class="campaign-item">
+        <div class="ci-left">
+          <div class="ci-label">01 // Economic Front</div>
+          <h2 class="ci-title">Jobs for Youth (J4Y)</h2>
+          <span class="ci-status s-active">Active Rollout</span>
+        </div>
+        <div class="ci-right">
+          <div class="ci-body">
+            <p>Launched as a direct challenge to the devastating youth unemployment crisis (>60% structural exclusion), the "Jobs for Youth" campaign bypasses institutional empty talk to demand legal and industrial policy adjustments directly from local authorities and business sectors.</p>
+            <p>Our core, uncompromising programmatic demands include:</p>
+            <ul class="ci-list">
+              <li>Enforcing a binding public and private sector youth employment demographic quota of 30-40% across all contracting firms.</li>
+              <li>Reorienting the Expanded Public Works Programme (EPWP) away from temporary exploitation into secure, full-time local community development roles.</li>
+              <li>Executing an aggressive municipal-level industrial policy designed to absorb unemployed school-leavers and graduates directly into localized production.</li>
+            </ul>
+            <p><strong>Immediate Action:</strong> We are compiling individual CV bundles indexed by national identification numbers to deliver directly to local Departments of Labour alongside a clear, binding Memorandum of Demands.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="campaign-item">
+        <div class="ci-left">
+          <div class="ci-label">02 // Civic Empowerment</div>
+          <h2 class="ci-title">Your Vote, Your Power</h2>
+          <span class="ci-status s-active">Running Concurrent</span>
+        </div>
+        <div class="ci-right">
+          <div class="ci-body">
+            <p>The 2026 Local Government Elections (LGE) represent the single most powerful near-term avenue for rewriting municipal accountability. Half of South Africa sat out the 2021 municipal cycle—we are making sure that never happens again.</p>
+            <p>This initiative directly addresses systemic voter alienation through programmatic tracking:</p>
+            <ul class="ci-list">
+              <li>Decentralized voter registration drives linking young eligible citizens straight to the Independent Electoral Commission (IEC) portals.</li>
+              <li>Ward-level educational workshops demystifying proportional representation, proportional seat allocations, and the independent candidate framework.</li>
+              <li>A massive public mobilization push demonstrating exactly how your ward councillor directly controls potholes, local electricity safety, water lines, and community support lines.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="campaign-item">
+        <div class="ci-left">
+          <div class="ci-label">03 // Public Integrity</div>
+          <h2 class="ci-title">Transparency Now!</h2>
+          <span class="ci-status s-dev">In Development</span>
+        </div>
+        <div class="ci-right">
+          <div class="ci-body">
+            <p>A campaign designed to dismantle the closed-door culture of municipal tender boards. Transparency Now! will train community members to use statutory mechanisms to audit local government spending timelines, track infrastructure delays, and publish procurement records directly to an open digital domain.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="page-reform">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="eyebrow">The Root Problem</div>
+      <h1 class="section-title">Electoral <em>Reform</em> Campaign</h1>
+      <p class="section-body">The fundamental crisis of South African democracy lies in our electoral framework. Our current system insulates representatives from public consequences. We are campaigning to completely restore power to the ballot box.</p>
+    </div>
+  </div>
+
+  <section class="reform-problem">
+    <div class="reform-problem-inner">
+      <h2 class="problem-statement">The Broken Chain: <span>Closed-List Proportional Representation</span></h2>
+      <p class="body-text">Under the current national closed-list proportional system, you do not vote for an individual human being to represent your community in Parliament. You vote for a political party logo. The party leadership then decides behind closed doors who sits on the legislature benches.</p>
+      
+      <div class="chain-wrapper">
+        <div class="chain-node">
+          <div class="cn-label">Sovereign Citizen</div>
+          <div class="cn-sub">Casts vote for a logo</div>
+        </div>
+        <div class="cn-arrow">→</div>
+        <div class="chain-node highlighted">
+          <div class="cn-label">Party Bosses</div>
+          <div class="cn-sub">Controls internal lists</div>
+        </div>
+        <div class="cn-arrow">→</div>
+        <div class="chain-node">
+          <div class="cn-label">Member of Parliament</div>
+          <div class="cn-sub">Answers only to the party</div>
+        </div>
+      </div>
+
+      <p class="body-text">This structural loop creates a devastating dynamic: public representatives are incentivized to defend their party's leadership and political survival at all costs, completely ignoring the suffering, lack of service delivery, and direct mandates of the citizens who voted for them. If an MP breaks rank to stand with the people, they are simply removed from the party list. This is what we must change.</p>
+    </div>
+  </section>
+
+  <section class="reform-proposals">
+    <div class="reform-proposals-inner">
+      <div class="eyebrow">Our Legislative Blueprint</div>
+      <h2 class="section-title">Constitutional & Statutory <em>Demands</em></h2>
+      <p class="section-body" style="margin-bottom: 32px;">EIE SA is building an alliance of legal advocates, grassroots organizations, and civil networks to lobby for a total democratic overhaul:</p>
+      
+      <div class="rule-heavy"></div>
+
+      <div class="reform-item">
+        <div class="ri-num">01</div>
+        <div class="ri-right">
+          <h3 class="ri-title">Direct Constituency-Based Representation</h3>
+          <div class="ri-body">
+            <p>We demand a transition toward a constituency-focused electoral design for national and provincial chambers, mimicking our local ward structures. South Africa must be carved into explicit geographic constituencies where distinct candidates stand against one another transparently.</p>
+            <div class="ri-result">
+              <strong>The Strategic Outcome:</strong> Members of Parliament will have physical constituency offices inside your neighborhood. If they fail to deliver or protect your community interests, they can be voted out directly by name in the subsequent cycle, regardless of party protection.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reform-item">
+        <div class="ri-num">02</div>
+        <div class="ri-right">
+          <h3 class="ri-title">Direct Executive Election Modality</h3>
+          <div class="ri-body">
+            <p>The positions of President and Provincial Premiers must be separated from legislative party seat dominance. The sovereign electorate must have a separate, dedicated ballot to vote directly for executive leadership candidates.</p>
+            <div class="ri-result">
+              <strong>The Strategic Outcome:</strong> The head of state receives a direct national popular mandate from the people, creating a clear constitutional separation of powers and ensuring executive leadership answers to the general populace rather than parliament faction battles.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reform-item">
+        <div class="ri-num">03</div>
+        <div class="ri-right">
+          <h3 class="ri-title">Enforceable Constituency Recall Mechanisms</h3>
+          <div class="ri-body">
+            <p>Constituent majorities must possess a clear, legal avenue to initiate local recall petitions. If a sitting public representative is compromised by corruption, ethical breaches, or continuous negligence, voters can force an immediate local by-election mid-term.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</section>
+
+<section class="page-section" id="page-join">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="eyebrow">Take Action Today</div>
+      <h1 class="section-title">Lock in with the <em>Movement</em></h1>
+      <p class="section-body">We do not ask for passive followers. We demand active, committed builders who are ready to dedicate their skills to defending our collective future.</p>
+    </div>
+  </div>
+
+  <section class="join-ways">
+    <div class="container">
+      <div class="join-grid">
+        <div class="join-card">
+          <div class="jc-icon">📢</div>
+          <h3 class="jc-title">Join the Media Team</h3>
+          <p class="jc-desc">We are actively expanding a highly disciplined, 8-person Media & Communications unit. If you excel at digital copywriting, graphic asset design, video creation, or platform trend tracking, we need your talent immediately.</p>
+          <a href="#volunteer-anchor" class="btn btn-outline" style="text-align:center;">Apply Below</a>
+        </div>
+        <div class="join-card">
+          <div class="jc-icon">✊</div>
+          <h3 class="jc-title">Grassroots Mobiliser</h3>
+          <p class="jc-desc">Step onto the front lines as an operational activist in your local municipality. Coordinate regional CV collections for the J4Y campaign, set up voter registration hubs, and build localized community watchdog circles.</p>
+          <a href="#volunteer-anchor" class="btn btn-outline" style="text-align:center;">Apply Below</a>
+        </div>
+        <div class="join-card">
+          <div class="jc-icon">⚖</div>
+          <h3 class="jc-title">Advocacy & Policy</h3>
+          <p class="jc-desc">Lend your specialized legal, research, or compliance knowledge. Assist our teams in drafting formal institutional memorandums, reviewing localized governance data, and processing constitutional reform requests.</p>
+          <a href="#volunteer-anchor" class="btn btn-outline" style="text-align:center;">Apply Below</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="donate-banner">
+    <div class="donate-banner-inner">
+      <div>
+        <h2 class="donate-title">Sustain Our <em>Independence</em></h2>
+        <p class="donate-body">To maintain our absolute freedom to challenge corrupt structures and political party overreach, EIE SA refuses corporate capture or compromised external funding. Our operations are entirely fueled by crowdfunding and direct individual citizen support. Every contribution directly funds ground asset mobilization, civic educational prints, and campaign infrastructure.</p>
+      </div>
+      <div class="donate-methods">
+        <div class="donate-method">
+          <span class="dm-name">Direct Banking / EFT Option</span>
+          <span class="dm-detail">Account details available via official request to finance structures</span>
+        </div>
+        <div class="donate-method">
+          <span class="dm-name">Independent Crowdfunding Pipeline</span>
+          <span class="dm-detail">Secure digital gateway deployment coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="volunteer-section" id="volunteer-anchor">
+    <div class="volunteer-inner">
+      <div style="text-align:center; margin-bottom: 40px;">
+        <div class="eyebrow">Deployment Registry</div>
+        <h2 class="section-title" style="margin-bottom:0;">Volunteer <em>Enlistment</em></h2>
+      </div>
+      
+      <form id="volunteerForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Full Name</label>
+            <input type="text" id="f-name" required placeholder="e.g. Thabo Khumalo">
+          </div>
+          <div class="form-group">
+            <label for="f-phone">WhatsApp Number</label>
+            <input type="tel" id="f-phone" required placeholder="e.g. 082 123 4567">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f-email">Email Address</label>
+          <input type="email" id="f-email" required placeholder="name@domain.co.za">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-province">Province Location</label>
+            <select id="f-province" required>
+              <option value="" disabled selected>Select your province</option>
+              <option value="EC">Eastern Cape</option>
+              <option value="FS">Free State</option>
+              <option value="GP">Gauteng</option>
+              <option value="KZN">KwaZulu-Natal</option>
+              <option value="LP">Limpopo</option>
+              <option value="MP">Mpumalanga</option>
+              <option value="NC">Northern Cape</option>
+              <option value="NW">North West</option>
+              <option value="WC">Western Cape</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-wing">Preferred Deployment Wing</label>
+            <select id="f-wing" required>
+              <option value="" disabled selected>Select functional area</option>
+              <option value="media">Media & Communications Team</option>
+              <option value="ground">Grassroots Mobilisation Force</option>
+              <option value="legal">Legal Advocacy & Policy Team</option>
+              <option value="logistics">Administration & Logistics</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f-skills">Briefly outline your professional skills or experience</label>
+          <textarea id="f-skills" required placeholder="Tell us about your background (e.g. graphic design, copywriting, legal research, community organizing)..."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Submit Enlistment Mandate</button>
+      </form>
+    </div>
+  </section>
+</section>
+
+<section class="page-section" id="page-contact">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="eyebrow">Connect With Us</div>
+      <h1 class="section-title">Open <em>Communications</em></h1>
+      <p class="section-body">Have inquiries, media requests, or seek to establish strategic institutional alliances? Reach out straight to our operational coordinating channels.</p>
+    </div>
+  </div>
+
+  <section class="contact-body">
+    <div class="contact-inner">
+      <div class="contact-details">
+        <div>
+          <div class="cd-label">Central Operations Email</div>
+          <div class="cd-value"><a href="mailto:enoughisenoughaone@gmail.com">enoughisenoughaone@gmail.com</a></div>
+        </div>
+        <div>
+          <div class="cd-label">Root Domain Repository</div>
+          <div class="cd-value"><a href="http://www.eiesa.org.za" target="_blank" rel="noopener">www.eiesa.org.za</a></div>
+        </div>
+        <div>
+          <div class="cd-label">Organizational Status</div>
+          <div class="cd-value">Independent, Youth-Led Civic Action Alliance & Civil Society Organism</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="cd-label" style="margin-bottom: 16px;">Official Social Architecture</div>
+        <div class="socials">
+          <a href="https://x.com/eiesouthafrica" target="_blank" rel="noopener" class="social-row">
+            <span class="social-platform">X / Twitter</span>
+            <span>@eiesouthafrica</span>
+          </a>
+          <a href="https://www.tiktok.com/@enoughisenough_sa" target="_blank" rel="noopener" class="social-row">
+            <span class="social-platform">TikTok</span>
+            <span>@enoughisenough_sa</span>
+          </a>
+          <a href="https://www.instagram.com/eie_sa" target="_blank" rel="noopener" class="social-row">
+            <span class="social-platform">Instagram</span>
+            <span>@eie_sa</span>
+          </a>
+          <a href="https://www.facebook.com/share/1AMEg4CNTt/" target="_blank" rel="noopener" class="social-row">
+            <span class="social-platform">Facebook</span>
+            <span>EIE_SA</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fb-name">EIE <span>SA</span></div>
+      <p class="fb-desc">A nation-building engine designed to mobilize, educate, and empower the youth of South Africa to reclaim public integrity.</p>
+    </div>
+    <div>
+      <div class="fc-title">Navigation</div>
+      <ul class="fc-links">
+        <li><a href="#" onclick="showPage('home')">Home Baseline</a></li>
+        <li><a href="#" onclick="showPage('about')">Our Constitution</a></li>
+        <li><a href="#" onclick="showPage('campaigns')">Frontline Campaigns</a></li>
+        <li><a href="#" onclick="showPage('reform')">Electoral Blueprint</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Get Involved</div>
+      <ul class="fc-links">
+        <li><a href="#" onclick="showPage('join')">Enlist as Volunteer</a></li>
+        <li><a href="#" onclick="showPage('join')">Sustain Independently</a></li>
+        <li><a href="#" onclick="showPage('contact')">Media Interventions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="fc-copy">&copy; 2026 Enough Is Enough South Africa (EIE SA). All Sovereign Rights Reserved.</div>
+    <div class="fc-tag">#WeRefuseToInheritABrokenNation</div>
+  </div>
+</footer>
+
+<script>
+function showPage(pageId) {
+  // Hide all sections
+  const sections = document.querySelectorAll('.page-section');
+  sections.forEach(sec => sec.classList.remove('active'));
+
+  // Show requested section
+  const targetSection = document.getElementById('page-' + pageId);
+  if(targetSection) {
+    targetSection.classList.add('active');
+  }
+
+  // Update navbar styling links
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => link.classList.remove('active'));
+  
+  const targetNavLink = document.getElementById('nav-' + pageId);
+  if(targetNavLink) {
+    targetNavLink.classList.add('active');
+  }
+
+  // Update mobile nav menu styling links
+  const mobLinks = document.querySelectorAll('.mobile-menu a');
+  mobLinks.forEach(link => link.classList.remove('active'));
+  
+  const targetMobLink = document.getElementById('mob-' + pageId);
+  if(targetMobLink) {
+    targetMobLink.classList.add('active');
+  }
+
+  // Scroll to summit of page cleanly
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function toggleMobile() {
+  const menu = document.getElementById('mobileMenu');
+  if(menu) {
+    menu.classList.toggle('open');
+  }
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  
+  // Extract registry metrics
+  const name = document.getElementById('f-name').value;
+  const phone = document.getElementById('f-phone').value;
+  const wing = document.getElementById('f-wing').value;
+  
+  alert(`Thank you, ${name}. Your enlistment mandate for the ${wing.toUpperCase()} wing has been securely logged into our internal coordination registry. An operational representative will message you on WhatsApp (${phone}) shortly. Lock in.`);
+  
+  document.getElementById('volunteerForm').reset();
+}
+</script>
+
+</body>
+</html>
